@@ -27,6 +27,12 @@ streamlit.dataframe(fruits_to_show)
 #Commenting the Json response
 #streamlit.text(fruityvice_response.json())
 
+#create a repeatable block of code (function)
+def get_fruityvice_data(this_fruit_choice):
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+        fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+        return fruityvice_normalized    
+
 #New Section to display on the FruityVice API Response
 streamlit.header("FruityVice Fruit Advice")
 try:
@@ -34,19 +40,20 @@ try:
     if not fruit_choice:
         streamlit.error("Please select a fruit to get information")
     else:     
-        #Adding Kiwi fruit, adding the dynamic variable 
-        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-        #Take the JSON object and normalize it
-        fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-        #Output to the screen as a table
-        streamlit.dataframe(fruityvice_normalized)
+        back_from_function = get_fruityvice_data(fruit_choice)
+        streamlist.dataframe(back_from_function)
 except URLError as e:
   streamlit.error()
 
 #streamlit.write('The user entered ', fruit_choice)
-
 #import requests
 
+#Adding Kiwi fruit, adding the dynamic variable 
+#fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+#Take the JSON object and normalize it
+#fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+#Output to the screen as a table
+#streamlit.dataframe(fruityvice_normalized)
 
 #Do not run anything beyound this point
 streamlit.stop()
