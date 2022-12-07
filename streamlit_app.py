@@ -26,7 +26,7 @@ streamlit.header("FruityVice Fruit Advice")
 #streamlit.text(fruityvice_response.json())
 
 #New Section to display on the FruityVice API Response
-fruit_choice = streamlist.text('What fruit would you like information about?', 'Kiwi')
+fruit_choice = streamlist.text_input('What fruit would you like information about?', 'Kiwi')
 streamlit.writer('The User entered', fruit_choice)
 
 #Adding Kiwi fruit, adding the dynamic variable 
