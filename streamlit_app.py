@@ -21,12 +21,17 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
 
 import requests
-#Adding Kiwi fruit
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
-
 streamlit.header("FruityVice Fruit Advice")
 #Commenting the Json response
 #streamlit.text(fruityvice_response.json())
+
+#New Section to display on the FruityVice API Response
+fruit_choice = streamlist.text('What fruit would you like information about?', 'Kiwi')
+streamlit.writer('The User entered', fruit_choice)
+
+#Adding Kiwi fruit, adding the dynamic variable 
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+
 
 #Take the JSON object and normalize it
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
